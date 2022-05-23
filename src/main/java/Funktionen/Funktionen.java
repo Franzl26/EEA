@@ -1,6 +1,7 @@
 package Funktionen;
 
 import java.math.BigInteger;
+import java.util.random.RandomGenerator;
 
 public class Funktionen {
     public static BigInteger ggt(long r0, long r1) {
@@ -69,7 +70,8 @@ public class Funktionen {
 
             if (ausgabe)
                 System.out.printf("%" + stellen + "d = %d * %" + stellen + "d + %" + stellen + "d", r0, r0.divide(r1), r1, r2);
-            if (ausgabe && !r2.equals(BigInteger.ZERO)) System.out.printf("  |  %" + stellen + "d = %3d * %d + %3d * %d\n", r2, s2, r0alt, t2, r1alt);
+            if (ausgabe && !r2.equals(BigInteger.ZERO))
+                System.out.printf("  |  %" + stellen + "d = %3d * %d + %3d * %d\n", r2, s2, r0alt, t2, r1alt);
             else if (ausgabe) System.out.print("\n");
             // Variablen verschieben
             r0 = r1;
@@ -98,7 +100,7 @@ public class Funktionen {
         BigInteger zahl = new BigInteger(zahlIn);
         StringBuilder s = new StringBuilder();
         while (!zahl.equals(BigInteger.ONE)) {
-            for (int i = 2;; i++) {
+            for (int i = 2; ; i++) {
                 BigInteger itmp = BigInteger.valueOf(i);
                 if (zahl.remainder(itmp).equals(BigInteger.ZERO)) {
                     if (!s.isEmpty()) s.append(" * ");
@@ -131,5 +133,33 @@ public class Funktionen {
             ergebnis[i] = BigInteger.valueOf(werte[i]).modPow(key, modus);
         }
         return ergebnis;
+    }
+
+    public static BigInteger modPow(long basis, long exponent, long modulus) {
+        return BigInteger.valueOf(basis).modPow(BigInteger.valueOf(exponent), BigInteger.valueOf(modulus));
+    }
+
+    public static BigInteger squareAndMultiply(long basis, long exponent, long modulus) {
+        return squareAndMultiply(Long.toString(basis), Long.toString(exponent), Long.toString(modulus));
+    }
+
+    public static BigInteger squareAndMultiply(String basisIn, String exponentIn, String modulusIn) {
+        BigInteger basis = new BigInteger(basisIn);
+        BigInteger exponent = new BigInteger(exponentIn);
+        BigInteger modulus = new BigInteger(modulusIn);
+
+        int size = exponent.bitLength();
+        BigInteger erg = BigInteger.ONE;
+        for (int i = 1; i <= size; i++) {
+            erg = erg.pow(2).mod(modulus);
+            System.out.print(i + ": " + erg + ", ");
+            if (exponent.testBit(size - i)) {
+                erg = erg.multiply(basis).mod(modulus);
+                System.out.println(erg);
+            } else {
+                System.out.println(erg);
+            }
+        }
+        return erg;
     }
 }

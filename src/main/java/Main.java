@@ -5,8 +5,9 @@ import static Funktionen.Funktionen.*;
 
 public class Main {
     public static void main(String[] args) {
-        test();
+        //test();
         uebung5();
+        System.out.println(faktorisieren(1131));
     }
 
     public static void uebung5() {
@@ -19,7 +20,7 @@ public class Main {
 
         // Aufgabe 3
         System.out.println("\nAufgabe 3: "); // 55=5*11 phi(55)=4*10=40
-        for (int i=1;i<40;i++) {
+        for (int i = 1; i < 40; i++) {
             if (ggt(i, 40).longValue() == 1) System.out.print(i + ", ");
         }
 
@@ -31,6 +32,83 @@ public class Main {
         ergebnis = rsaCrypt(new long[]{18, 1, 2, 3, 18, 16, 19, 3, 11, 6, 0, 17, 16, 3, 7, 11, 6, 13, 16, 13, 14}, 5, 21);
         System.out.println("b: " + Arrays.toString(ergebnis));
         // System.out.println("b^-1: " + Arrays.toString(rsaCrypt(ergebnis, 5, 21)));
+
+        // Aufgabe 5
+        System.out.println("\nAufgabe 5:");
+        System.out.println("22663 faktorisiert: " + faktorisieren(22663));
+        System.out.println("d=e^-1 mod phi(n): " + inverseBerechnen(14907, 22360));
+        BigInteger[] a5 = rsaCrypt(new long[]{3595, 10898, 2212, 4379, 1736, 14519, 6584, 2489, 21854, 15215, 4972, 12974}, 3, 22663);
+        System.out.println("blockarray: " + Arrays.toString(a5));
+        for (BigInteger i : a5) {
+            System.out.print(i.longValue() / 27 + ":" + i.longValue() % 27 + ";  "); //Kryptographie ist klasse
+        }
+        System.out.println();
+
+        // Aufgabe 6
+        System.out.println("\nAufgabe 6:");
+        System.out.println("alpha: " + modPow(2, 6, 11));
+        System.out.println("betta: " + modPow(2, 7, 11));
+        System.out.println("k-Alice: " + modPow(7, 6, 11));
+        System.out.println("k - Bob: " + modPow(9, 7, 11));
+        for (int i = 1; i < 11; i++) {
+            System.out.print(modPow(10, i, 11) + ", ");
+        }
+        System.out.println();
+
+        // Aufgabe 7
+        System.out.println("\nAufgabe 7:");
+        System.out.println("k: " + modPow(25, 22, 2017));
+
+        // Aufgabe 8
+        System.out.println("\nAufgabe 8:");
+        System.out.println("betta: " + modPow(2, 6, 11));
+        System.out.println("c1: " + modPow(2, 7, 11));
+        System.out.println("c2: " + modPow((long) (Math.pow(9, 7) * 5), 1, 11));
+        System.out.println("x: " + modPow(7, 6, 11));
+        System.out.println("x^-1: " + inverseBerechnen(4, 11));
+        System.out.println("m: " + modPow(3 * 9, 1, 11));
+
+        // Aufgabe Z1
+        System.out.println("\nAufgabe Z1:");
+        for (int i = 1; i < 50; i++) {
+            System.out.printf("%2d: %2d, ", i, modPow(19, i, 29));
+            if (i % 10 == 0)
+                System.out.println();
+        }
+        System.out.println();
+
+        // Aufgabe Z2
+        System.out.println("\nAufgabe Z2:");
+        System.out.println(squareAndMultiply(14, 24, 55));
+        System.out.println(modPow(14, 14, 55));
+
+        // Aufgabe Z3
+        System.out.println("\nAufgabe Z3:");
+        for (int i = 1; i < 2017; i++) {
+            if (modPow(5, i, 2017).longValue() == 3) System.out.println("a = " + i);
+            if (modPow(5, i, 2017).longValue() == 288) System.out.println("b = " + i);
+        }
+        System.out.println("k: " + modPow(5, 1030 * 194, 2017));
+
+        // Aufgabe Z4
+        System.out.println("\nAufgabe Z4:");
+        System.out.println("betta: " + modPow(22, 76, 1131));
+        long betta = 76;
+        long b = 1;
+        for (int i = 1; i < 1131; i++) {
+            if (modPow(22, i, 1131).longValue() == 76) System.out.println("b = " + i);
+        }
+        long[] r = new long[]{74, 75, 13};
+        long[] m = new long[]{69, 105, 115};
+        for (int i = 0; i < 3; i++) {
+            System.out.print("c" + i + "1: " + modPow(22, r[i], 1131));
+            System.out.println("   c" + i + "2: " + modPow((long) (Math.pow(betta, r[i]) * m[i]), 1, 1131));
+        }
+        long[] c1 = new long[]{836, 274, 178};
+        long[] c2 = new long[]{475, 475, 475};
+        for (int i = 0; i < 3; i++) {
+            System.out.println("m: " + modPow(c2[i] * inverseBerechnen(modPow(c1[i], b, 1131).longValue(), 1131).longValue(), 1, 1131));
+        }
     }
 
     public static void test() {
