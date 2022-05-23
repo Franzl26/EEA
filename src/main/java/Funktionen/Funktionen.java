@@ -1,7 +1,6 @@
 package Funktionen;
 
 import java.math.BigInteger;
-import java.util.random.RandomGenerator;
 
 public class Funktionen {
     public static BigInteger ggt(long r0, long r1) {
@@ -101,14 +100,14 @@ public class Funktionen {
         StringBuilder s = new StringBuilder();
         while (!zahl.equals(BigInteger.ONE)) {
             for (int i = 2; ; i++) {
-                BigInteger itmp = BigInteger.valueOf(i);
-                if (zahl.remainder(itmp).equals(BigInteger.ZERO)) {
+                BigInteger iTmp = BigInteger.valueOf(i);
+                if (zahl.remainder(iTmp).equals(BigInteger.ZERO)) {
                     if (!s.isEmpty()) s.append(" * ");
                     s.append(i);
-                    zahl = zahl.divide(itmp);
+                    zahl = zahl.divide(iTmp);
                     break;
                 }
-                if (itmp.equals(zahl.shiftRight(2).max(itmp))) {
+                if (iTmp.equals(zahl.shiftRight(2).max(iTmp))) {
                     if (!s.isEmpty()) s.append(" * ");
                     s.append(zahl);
                     zahl = BigInteger.ONE;
@@ -152,13 +151,13 @@ public class Funktionen {
         BigInteger erg = BigInteger.ONE;
         for (int i = 1; i <= size; i++) {
             erg = erg.pow(2).mod(modulus);
-            System.out.print(i + ": " + erg + ", ");
+            // System.out.print(i + ": " + erg + ", ");
             if (exponent.testBit(size - i)) {
                 erg = erg.multiply(basis).mod(modulus);
+                //System.out.println(erg);
+            } /*else {
                 System.out.println(erg);
-            } else {
-                System.out.println(erg);
-            }
+            }*/
         }
         return erg;
     }

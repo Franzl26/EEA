@@ -5,9 +5,9 @@ import static Funktionen.Funktionen.*;
 
 public class Main {
     public static void main(String[] args) {
-        //test();
+        // test();
+        // speedTest();
         uebung5();
-        System.out.println(faktorisieren(1131));
     }
 
     public static void uebung5() {
@@ -118,5 +118,18 @@ public class Main {
         System.out.println(inverseBerechnen(7, 12));
         System.out.println(inverseBerechnen(12, 67));
         System.out.println(faktorisieren(976));
+    }
+
+    public static void speedTest() {
+        int anz = 10000;
+        long modulus = 7 * anz / 2;
+        long start = System.currentTimeMillis();
+        for (int i = 1; i < anz; i++) modPow(2L, i, modulus);
+        long mitte = System.currentTimeMillis();
+        for (int i = 1; i < anz; i++) squareAndMultiply(2L, i, modulus);
+        long ende = System.currentTimeMillis();
+        System.out.println(mitte - start);
+        System.out.println(ende - mitte);
+
     }
 }
