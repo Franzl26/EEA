@@ -1,6 +1,16 @@
 package Funktionen;
 
+import java.math.BigInteger;
+
 public class Funktionen {
+    public static BigInteger ggt(long r0, long r1) {
+        return ggt(Long.toString(r0), Long.toString(r1));
+    }
+
+    public static BigInteger ggt(String r0, String r1) {
+        return new BigInteger(r0).gcd(new BigInteger(r1));
+    }
+
     public static long euklidischerAlgorithmus(long r0, long r1) {
         return euklidischerAlgorithmus(r0, r1, false);
     }
@@ -24,7 +34,15 @@ public class Funktionen {
         return r0;
     }
 
-    public static long[] erweiterterEuklidischerAlgorithmus(long r0, long r1) {
+    public static BigInteger[] erweiterterEuklidischerAlgorithmus(long r0, long r1) {
+        return erweiterterEuklidischerAlgorithmus(Long.toString(r0), Long.toString(r1), false);
+    }
+
+    public static BigInteger[] erweiterterEuklidischerAlgorithmus(long r0, long r1, boolean ausgabe) {
+        return erweiterterEuklidischerAlgorithmus(Long.toString(r0), Long.toString(r1), ausgabe);
+    }
+
+    public static BigInteger[] erweiterterEuklidischerAlgorithmus(String r0, String r1) {
         return erweiterterEuklidischerAlgorithmus(r0, r1, false);
     }
 
@@ -32,25 +50,26 @@ public class Funktionen {
      * @param ausgabe Erweiterte Ausgabe / Lösungsweg
      * @return Integer-Array mit 3 Werten: ggT(r0,r1); s; t mit 1 = s * r0 + t * r1
      */
-    public static long[] erweiterterEuklidischerAlgorithmus(long r0, long r1, boolean ausgabe) {
-        if (r0 < 1 || r1 < 1)
-            throw new IllegalArgumentException("r0 und r1 muessen positive ganze Zahlen sein");
-        if (r0 < r1)
-            throw new IllegalArgumentException("r0 muss groesser als r1 sein");
-        long r0alt = r0;
-        long r1alt = r1;
-        long s0 = 1, s1 = 0, t0 = 0, t1 = 1;
-        long stellen = (int) (Math.log10(r0) + 1);
+    public static BigInteger[] erweiterterEuklidischerAlgorithmus(String r0in, String r1in, boolean ausgabe) {
+        BigInteger r0 = new BigInteger(r0in);
+        BigInteger r1 = new BigInteger(r1in);
+        BigInteger r0alt = r0;
+        BigInteger r1alt = r1;
+        BigInteger s0 = BigInteger.valueOf(1);
+        BigInteger s1 = BigInteger.valueOf(0);
+        BigInteger t0 = BigInteger.valueOf(0);
+        BigInteger t1 = BigInteger.valueOf(1);
+        long stellen = (int) (Math.log10(r0.longValue()) + 1);
         do {
             // neue Variablen Berechnen
-            long r2 = r0 % r1;
-            long q = r0 / r1;
-            long s2 = s0 - q * s1;
-            long t2 = t0 - q * t1;
+            BigInteger r2 = r0.remainder(r1);
+            BigInteger q = r0.divide(r1);
+            BigInteger s2 = s0.subtract(q.multiply(s1));
+            BigInteger t2 = t0.subtract(q.multiply(t1));
 
             if (ausgabe)
-                System.out.printf("%" + stellen + "d = %d * %" + stellen + "d + %" + stellen + "d", r0, r0 / r1, r1, r2);
-            if (ausgabe && r2 != 0) System.out.printf("  |  %" + stellen + "d = %3d * %d + %3d * %d\n", r2, s2, r0alt, t2, r1alt);
+                System.out.printf("%" + stellen + "d = %d * %" + stellen + "d + %" + stellen + "d", r0, r0.divide(r1), r1, r2);
+            if (ausgabe && !r2.equals(BigInteger.ZERO)) System.out.printf("  |  %" + stellen + "d = %3d * %d + %3d * %d\n", r2, s2, r0alt, t2, r1alt);
             else if (ausgabe) System.out.print("\n");
             // Variablen verschieben
             r0 = r1;
@@ -59,44 +78,38 @@ public class Funktionen {
             s1 = s2;
             t0 = t1;
             t1 = t2;
-        } while (r1 != 0);
-        return new long[]{r0, s0, t0};
+        } while (!r1.equals(BigInteger.valueOf(0)));
+        return new BigInteger[]{r0, s0, t0};
     }
 
-    public static long inverseBerechnen(long zahl, long moduloRaum) {
-        return inverseBerechnen(zahl, moduloRaum, false);
+    public static BigInteger inverseBerechnen(long zahl, long moduloRaum) {
+        return inverseBerechnen(Long.toString(zahl), Long.toString(moduloRaum));
     }
 
-    /**
-     * @param ausgabe erweiterte Ausgabe / Lösungsweg
-     * @return zahl^-1 mod moduloRaum
-     */
-    public static long inverseBerechnen(long zahl, long moduloRaum, boolean ausgabe) {
-        if (zahl < 1 || moduloRaum < 1)
-            throw new IllegalArgumentException("Beide Parameter muessen groesser 0 sein");
-        if (zahl > moduloRaum)
-            throw new IllegalArgumentException("Zahl muss groesser als der ModuloRaum sein");
-        long[] ergebnis = erweiterterEuklidischerAlgorithmus(moduloRaum, zahl, ausgabe);
-        if (ergebnis[0] != 1)
-            throw new IllegalArgumentException("der GGT der Parameter ist nicht 1 und damit keine Inverse bestimmbar");
-        if (ergebnis[2] < 0) ergebnis[2] += moduloRaum;
-        return ergebnis[2];
+    public static BigInteger inverseBerechnen(String zahl, String moduloRaum) {
+        return new BigInteger(zahl).modInverse(new BigInteger(moduloRaum));
     }
 
     public static String faktorisieren(long zahl) {
+        return faktorisieren(Long.toString(zahl));
+    }
+
+    public static String faktorisieren(String zahlIn) {
+        BigInteger zahl = new BigInteger(zahlIn);
         StringBuilder s = new StringBuilder();
-        while (zahl != 1) {
+        while (!zahl.equals(BigInteger.ONE)) {
             for (int i = 2;; i++) {
-                if (zahl % i == 0) {
+                BigInteger itmp = BigInteger.valueOf(i);
+                if (zahl.remainder(itmp).equals(BigInteger.ZERO)) {
                     if (!s.isEmpty()) s.append(" * ");
                     s.append(i);
-                    zahl /= i;
+                    zahl = zahl.divide(itmp);
                     break;
                 }
-                if (i > zahl / 2) {
+                if (itmp.equals(zahl.shiftRight(2).max(itmp))) {
                     if (!s.isEmpty()) s.append(" * ");
                     s.append(zahl);
-                    zahl = 1;
+                    zahl = BigInteger.ONE;
                     break;
                 }
             }
@@ -105,10 +118,17 @@ public class Funktionen {
         return s.toString();
     }
 
-    public static long[] rsaCrypt(long[] werte, long key, long modus) {
-        long[] ergebnis = new long[werte.length];
+    public static BigInteger[] rsaCrypt(long[] werte, long key, long modus) {
+        return rsaCrypt(werte, Long.toString(key), Long.toString(modus));
+    }
+
+    public static BigInteger[] rsaCrypt(long[] werte, String keyIn, String modusIn) {
+        BigInteger[] ergebnis = new BigInteger[werte.length];
+        BigInteger key = new BigInteger(keyIn);
+        BigInteger modus = new BigInteger(modusIn);
         for (int i = 0; i < werte.length; i++) {
-            ergebnis[i] = (werte[i] ^ key) % modus;
+            // System.out.println(Math.pow(werte[i], key));
+            ergebnis[i] = BigInteger.valueOf(werte[i]).modPow(key, modus);
         }
         return ergebnis;
     }
