@@ -14,8 +14,7 @@ public class Main {
         // Aufgabe 2
         System.out.println("Aufgabe 2:");
         System.out.println("2002: " + faktorisieren(2002));
-        // System.out.println("1004716607: " + faktorisieren(1004716607)); // ist Prim!
-        System.out.println("1004716607: " + "1004716607");
+        System.out.println("1004716607: " + faktorisieren(1004716607)); // ist Prim!
         System.out.println("1004716608: " + faktorisieren(1004716608));
 
         // Aufgabe 3
@@ -92,6 +91,7 @@ public class Main {
 
         // Aufgabe Z4
         System.out.println("\nAufgabe Z4:");
+        System.out.println("Fakt 1131:" + faktorisieren(1131));
         System.out.println("betta: " + modPow(22, 76, 1131));
         long betta = 76;
         long b = 1;

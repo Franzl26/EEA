@@ -98,6 +98,7 @@ public class Funktionen {
     public static String faktorisieren(String zahlIn) {
         BigInteger zahl = new BigInteger(zahlIn);
         StringBuilder s = new StringBuilder();
+        BigInteger ziel = zahl.sqrt();
         while (!zahl.equals(BigInteger.ONE)) {
             for (int i = 2; ; i++) {
                 BigInteger iTmp = BigInteger.valueOf(i);
@@ -107,7 +108,7 @@ public class Funktionen {
                     zahl = zahl.divide(iTmp);
                     break;
                 }
-                if (iTmp.equals(zahl.shiftRight(2).max(iTmp))) {
+                if (iTmp.equals(ziel.max(iTmp))) {
                     if (!s.isEmpty()) s.append(" * ");
                     s.append(zahl);
                     zahl = BigInteger.ONE;
