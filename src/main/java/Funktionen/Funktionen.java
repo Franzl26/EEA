@@ -1,6 +1,8 @@
 package Funktionen;
 
 import java.math.BigInteger;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class Funktionen {
     public static BigInteger ggt(long r0, long r1) {
@@ -161,5 +163,25 @@ public class Funktionen {
             }*/
         }
         return erg;
+    }
+
+    public static long[] getPrimitiveElement(long modulus) {
+        TreeSet<Long> ergebnis = new TreeSet<>();
+
+        long basis = 2;
+        while (basis < modulus) {
+            SortedSet<Long> list = new TreeSet<>();
+            for (int i = 1; i < modulus; i++) {
+                list.add(modPow(basis, i, modulus).longValue());
+            }
+            if (list.size() == modulus - 1) ergebnis.add(basis);
+            basis++;
+        }
+        Long[] tmp = ergebnis.toArray(new Long[0]);
+        long[] x = new long[ergebnis.size()];
+        for (int i = 0; i < ergebnis.size(); i++) {
+            x[i] = tmp[i];
+        }
+        return x;
     }
 }
