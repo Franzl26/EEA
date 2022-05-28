@@ -1,5 +1,8 @@
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import static Funktionen.Funktionen.*;
 
@@ -91,13 +94,20 @@ public class Main {
 
         // Aufgabe Z4
         System.out.println("\nAufgabe Z4:");
-        System.out.println("Fakt 1131:" + faktorisieren(1131));
-        System.out.println("betta: " + modPow(22, 76, 1131));
+        System.out.println("Fakt 1151: " + faktorisieren(1151));
         long betta = 76;
+        System.out.println("betta: " + betta);
         long b = 1;
-        for (int i = 1; i < 1131; i++) {
-            if (modPow(22, i, 1131).longValue() == 76) System.out.println("b = " + i);
+        SortedSet<Long> list = new TreeSet<>();
+        for (int i = 1; i < 1151; i++) {
+            long tmp = modPow(22, i, 1151).longValue();
+            //System.out.print(i + ": " + tmp + " \n");
+            list.add(tmp);
+            System.out.print(tmp + " ");
+            if (i == 575) System.out.println();
+            if (tmp == 76) System.out.println("b = " + i);
         }
+        System.out.println("elemente: " + list.size());
         long[] r = new long[]{74, 75, 13};
         long[] m = new long[]{69, 105, 115};
         for (int i = 0; i < 3; i++) {
