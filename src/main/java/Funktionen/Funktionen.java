@@ -165,7 +165,35 @@ public class Funktionen {
         return erg;
     }
 
-    public static long[] getPrimitiveElement(long modulus) {
+    public static long getPrimitiveElement(long modulus) {
+        long basis = 2;
+        while (basis < modulus) {
+            SortedSet<Long> list = new TreeSet<>();
+            for (int i = 1; i < modulus; i++) {
+                list.add(modPow(basis, i, modulus).longValue());
+            }
+            if (list.size() == modulus - 1) return basis;
+            basis++;
+        }
+        return -1;
+    }
+
+    public static boolean testPrimitiveElement(long element, long modulus) {
+        long basis = 2;
+        while (basis < modulus) {
+            SortedSet<Long> list = new TreeSet<>();
+            for (int i = 1; i < modulus; i++) {
+                list.add(modPow(basis, i, modulus).longValue());
+            }
+            if (list.size() == modulus - 1) {
+                if (basis == element) return true;
+            }
+            basis++;
+        }
+        return false;
+    }
+
+    public static long[] getAllPrimitiveElements(long modulus) {
         TreeSet<Long> ergebnis = new TreeSet<>();
 
         long basis = 2;

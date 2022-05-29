@@ -1,5 +1,4 @@
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -10,9 +9,10 @@ public class Main {
     public static void main(String[] args) {
         // test();
         // speedTest();
-        // uebung5();
-        getBasis();
-        System.out.println(Arrays.toString(getPrimitiveElement(1151)));
+        uebung5();
+        System.out.println(Arrays.toString(getAllPrimitiveElements(1151)));
+        System.out.println(faktorisieren(1151));
+        System.out.println(testPrimitiveElement(22, 1151));
     }
 
     public static void uebung5() {
@@ -143,24 +143,5 @@ public class Main {
         System.out.println(mitte - start);
         System.out.println(ende - mitte);
 
-    }
-
-    public static void getBasis() {
-        int basis = 2;
-        while (basis < 1151) {
-            SortedSet<Long> list = new TreeSet<>();
-            for (int i = 1; i < 1151; i++) {
-                long tmp = modPow(basis, i, 1151).longValue();
-                //System.out.print(i + ": " + tmp + " \n");
-                list.add(tmp);
-                //System.out.print(tmp + " ");
-                //if (i == 575) System.out.println();
-                if (tmp == 76) System.out.println("b = " + i);
-            }
-            if (list.size() > 1000)
-                System.out.println("basis: " + basis + ", elemente: " + list.size());
-
-            basis++;
-        }
     }
 }
