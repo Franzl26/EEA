@@ -10,9 +10,6 @@ public class Main {
         // test();
         // speedTest();
         uebung5();
-        // System.out.println(Arrays.toString(getAllPrimitiveElements(1151)));
-        // System.out.println(Arrays.toString(getAllPrimitiveElements(1163)));
-        // System.out.println(testPrimitiveElement(22, 1151));
     }
 
     public static void uebung5() {
@@ -99,22 +96,16 @@ public class Main {
         System.out.println("Fakt 1151: " + faktorisieren(1151));
         long betta = 76;
         long s = 22;
-        long mod = 1151;
+        long mod = 1163;
         System.out.println("betta: " + betta);
         long b = 1;
-        SortedSet<Long> list = new TreeSet<>();
         for (int i = 1; i < mod; i++) {
             long tmp = modPow(s, i, mod).longValue();
-            //System.out.print(i + ": " + tmp + " \n");
-            list.add(tmp);
-            System.out.print(tmp + " ");
-            if (i == 575) System.out.println();
             if (tmp == 76) {
                 System.out.println("b = " + i);
                 b = i;
             }
         }
-        System.out.println("\nelemente: " + list.size());
         long[] r = new long[]{74, 75, 13};
         long[] m = new long[]{69, 105, 115};
         long[] c1 = new long[3]; //{836, 274, 178};
@@ -127,7 +118,7 @@ public class Main {
             System.out.println("   c" + i + "2: " + c2[i]);
         }
         for (int i = 0; i < 3; i++) {
-            System.out.println("m: " + modPow(c2[i] * inverseBerechnen(modPow(c1[i], b, mod).longValue(), mod).longValue(), 1, 1131));
+            System.out.println("m: " + modPow(c2[i] * inverseBerechnen(modPow(c1[i], b, mod).longValue(), mod).longValue(), 1, mod));
         }
     }
 
