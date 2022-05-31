@@ -141,6 +141,10 @@ public class Funktionen {
         return BigInteger.valueOf(basis).modPow(BigInteger.valueOf(exponent), BigInteger.valueOf(modulus));
     }
 
+    public static long mod(long wert, long modulus) {
+        return BigInteger.valueOf(wert).mod(BigInteger.valueOf(modulus)).longValue();
+    }
+
     public static BigInteger squareAndMultiply(long basis, long exponent, long modulus) {
         return squareAndMultiply(Long.toString(basis), Long.toString(exponent), Long.toString(modulus));
     }

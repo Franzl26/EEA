@@ -1,7 +1,5 @@
 import java.math.BigInteger;
 import java.util.Arrays;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import static Funktionen.Funktionen.*;
 
@@ -9,7 +7,9 @@ public class Main {
     public static void main(String[] args) {
         // test();
         // speedTest();
-        uebung5();
+        // uebung5();
+        Uebung6.uebung6();
+        System.out.println("\n\n");
     }
 
     public static void uebung5() {
@@ -113,7 +113,7 @@ public class Main {
         for (int i = 0; i < 3; i++) {
             c1[i] = modPow(s, r[i], mod).longValue();
             c2[i] = modPow((long) (Math.pow(betta, r[i]) * m[i]), 1, mod).longValue();
-            c2[i] = modPow(modPow(betta,r[i], mod).longValue() * m[i], 1, mod).longValue();
+            c2[i] = modPow(modPow(betta, r[i], mod).longValue() * m[i], 1, mod).longValue();
             System.out.print("c" + i + "1: " + c1[i]);
             System.out.println("   c" + i + "2: " + c2[i]);
         }
