@@ -10,9 +10,9 @@ public class Main {
         // test();
         // speedTest();
         uebung5();
-        System.out.println(Arrays.toString(getAllPrimitiveElements(1151)));
-        System.out.println(faktorisieren(1151));
-        System.out.println(testPrimitiveElement(22, 1151));
+        // System.out.println(Arrays.toString(getAllPrimitiveElements(1151)));
+        // System.out.println(Arrays.toString(getAllPrimitiveElements(1163)));
+        // System.out.println(testPrimitiveElement(22, 1151));
     }
 
     public static void uebung5() {
@@ -98,28 +98,36 @@ public class Main {
         System.out.println("\nAufgabe Z4:");
         System.out.println("Fakt 1151: " + faktorisieren(1151));
         long betta = 76;
+        long s = 22;
+        long mod = 1151;
         System.out.println("betta: " + betta);
         long b = 1;
         SortedSet<Long> list = new TreeSet<>();
-        for (int i = 1; i < 1151; i++) {
-            long tmp = modPow(22, i, 1151).longValue();
+        for (int i = 1; i < mod; i++) {
+            long tmp = modPow(s, i, mod).longValue();
             //System.out.print(i + ": " + tmp + " \n");
             list.add(tmp);
             System.out.print(tmp + " ");
             if (i == 575) System.out.println();
-            if (tmp == 76) System.out.println("b = " + i);
+            if (tmp == 76) {
+                System.out.println("b = " + i);
+                b = i;
+            }
         }
-        System.out.println("elemente: " + list.size());
+        System.out.println("\nelemente: " + list.size());
         long[] r = new long[]{74, 75, 13};
         long[] m = new long[]{69, 105, 115};
+        long[] c1 = new long[3]; //{836, 274, 178};
+        long[] c2 = new long[3]; //{475, 475, 475};
         for (int i = 0; i < 3; i++) {
-            System.out.print("c" + i + "1: " + modPow(22, r[i], 1131));
-            System.out.println("   c" + i + "2: " + modPow((long) (Math.pow(betta, r[i]) * m[i]), 1, 1131));
+            c1[i] = modPow(s, r[i], mod).longValue();
+            c2[i] = modPow((long) (Math.pow(betta, r[i]) * m[i]), 1, mod).longValue();
+            c2[i] = modPow(modPow(betta,r[i], mod).longValue() * m[i], 1, mod).longValue();
+            System.out.print("c" + i + "1: " + c1[i]);
+            System.out.println("   c" + i + "2: " + c2[i]);
         }
-        long[] c1 = new long[]{836, 274, 178};
-        long[] c2 = new long[]{475, 475, 475};
         for (int i = 0; i < 3; i++) {
-            System.out.println("m: " + modPow(c2[i] * inverseBerechnen(modPow(c1[i], b, 1131).longValue(), 1131).longValue(), 1, 1131));
+            System.out.println("m: " + modPow(c2[i] * inverseBerechnen(modPow(c1[i], b, mod).longValue(), mod).longValue(), 1, 1131));
         }
     }
 
