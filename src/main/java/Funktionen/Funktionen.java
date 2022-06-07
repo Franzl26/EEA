@@ -85,12 +85,20 @@ public class Funktionen {
         return new BigInteger[]{r0, s0, t0};
     }
 
+    public static long inverseBerechnenLong(long zahl, long modulo) {
+        return inverseBerechnen(zahl, modulo).longValue();
+    }
+
     public static BigInteger inverseBerechnen(long zahl, long moduloRaum) {
         return inverseBerechnen(Long.toString(zahl), Long.toString(moduloRaum));
     }
 
     public static BigInteger inverseBerechnen(String zahl, String moduloRaum) {
-        return new BigInteger(zahl).modInverse(new BigInteger(moduloRaum));
+        try {
+            return new BigInteger(zahl).modInverse(new BigInteger(moduloRaum));
+        } catch (ArithmeticException ex) {
+            throw new ArithmeticException(Integer.valueOf(zahl) + " in " + Integer.valueOf(moduloRaum) + " ist nicht invertierbar");
+        }
     }
 
     public static String faktorisieren(long zahl) {
@@ -158,13 +166,9 @@ public class Funktionen {
         BigInteger erg = BigInteger.ONE;
         for (int i = 1; i <= size; i++) {
             erg = erg.pow(2).mod(modulus);
-            // System.out.print(i + ": " + erg + ", ");
             if (exponent.testBit(size - i)) {
                 erg = erg.multiply(basis).mod(modulus);
-                //System.out.println(erg);
-            } /*else {
-                System.out.println(erg);
-            }*/
+            }
         }
         return erg;
     }

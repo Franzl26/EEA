@@ -1,8 +1,8 @@
 import static Funktionen.Funktionen.*;
 import static Funktionen.Funktionen.mod;
 
-public class Uebung6 {
-    public static void uebung6() {
+public class Uebung7 {
+    public static void uebung7() {
         aufgabe1();
         aufgabe2();
         aufgabe3();
