@@ -16,14 +16,7 @@ public class Main {
         Uebung8.uebung8();
 
         System.out.println("\n\n");
-        ECGleichung gl = new ECGleichung(8,7,73);
-        ECPunkt p1 = new ECPunkt(gl, 32,53);
-        System.out.println(p1.isPrimitive(true));
-        ArrayList<ECPunkt> l = gl.printAllElements();
-        l.forEach(o -> {
-            if (o.isPrimitive()) System.out.println("isPrimitive: " + o);
-        });
-        System.out.println(p1.mult(13*17));
+
     }
 
     public static void test() {
@@ -62,5 +55,16 @@ public class Main {
         new ECPunkt(gl2, 9, 5).isPrimitive(true);
         System.out.println(gl2.add(1,5,11,10));
         System.out.println(gl2.verdoppeln(1,5));
+
+
+        ECGleichung gl3 = new ECGleichung(8,7,73);
+        ECPunkt p2 = new ECPunkt(gl3, 32,53);
+        System.out.println(p2.isPrimitive(true));
+        ArrayList<ECPunkt> l2 = gl3.printAllElements();
+        l2.forEach(o -> {
+            if (o.isPrimitive()) System.out.println("isPrimitive: " + o);
+        });
+        System.out.println(p2.mult(13*17));
+
     }
 }

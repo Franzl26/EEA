@@ -61,4 +61,8 @@ public class ECGleichung {
     public ECPunkt verdoppeln(long x, long y) {
         return new ECPunkt(this, x, y).verdoppeln();
     }
+
+    public ECPunkt mult(long x, long y, int d) {
+        return new ECPunkt(this, x, y).mult(d);
+    }
 }

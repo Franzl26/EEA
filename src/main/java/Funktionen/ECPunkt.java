@@ -61,7 +61,7 @@ public class ECPunkt {
         }
     }
 
-    public ECPunkt mult(int anz) {
+    public ECPunkt mult(long anz) {
         if (anz <= 0) throw new IllegalArgumentException("d muss >= 1 sein");
 
         BigInteger d = BigInteger.valueOf(anz);
