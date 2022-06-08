@@ -1,8 +1,6 @@
 package Funktionen;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import static Funktionen.Funktionen.mod;
 
@@ -50,5 +48,17 @@ public class ECGleichung {
         c.add(new ECPunkt(this, -1, -1));
         System.out.println("O\nAnzahl: " + count);
         return c;
+    }
+
+    public ECPunkt add(long x1, long y1, long x2, long y2) {
+        return add(new ECPunkt(this, x1, y1), new ECPunkt(this, x2, y2));
+    }
+
+    public ECPunkt add(ECPunkt p1, ECPunkt p2) {
+        return p1.add(p2);
+    }
+
+    public ECPunkt verdoppeln(long x, long y) {
+        return new ECPunkt(this, x, y).verdoppeln();
     }
 }
