@@ -38,10 +38,10 @@ public class Uebung7 {
         long[] m = new long[]{17, 17, 85};
         long[] kE = new long[]{31, 49, 77};
         for (int i = 0; i < 3; i++) {
-            long kEinv = inverseBerechnen(kE[i], p).longValue();
+            long kEinv = inverseBerechnen(kE[i], p - 1).longValue();
             long r = modPow(alpha, kE[i], p).longValue();
             long klammer = m[i] - d * r;
-            long u = modPow(klammer * kEinv, 1, p - 1).longValue();
+            long u = mod(klammer * kEinv, p - 1);
             //System.out.println("(" + (i + 1) + ") kEinv = " + kEinv + "  klammer = " + klammer + "  ");
             System.out.println("(" + (i + 1) + ") r = " + r + "   u = " + u);
         }

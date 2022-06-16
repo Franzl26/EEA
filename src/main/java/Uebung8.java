@@ -6,7 +6,7 @@ import static Funktionen.Funktionen.*;
 public class Uebung8 {
     public static void uebung8() {
         aufgabe1();
-        // aufgabe2();
+        //aufgabe2();
         aufgabe3();
         aufgabe5();
         aufgabe6();
@@ -23,7 +23,7 @@ public class Uebung8 {
         System.out.println("\nAufgabe 2:");
         ECGleichung gleichung = new ECGleichung(2, 2, 17);
         ECPunkt p1 = new ECPunkt(gleichung, 2, 7);
-        ECPunkt p2 = new ECPunkt(gleichung, 5, 2);
+        ECPunkt p2 = new ECPunkt(gleichung, 8, 2);
         System.out.println("a) (2, 7) + (5, 2) = " + p1.add(p2));
         ECPunkt p3 = new ECPunkt(gleichung, 3, 6);
         System.out.println("a) (3, 6) * 2 = " + (new ECPunkt(gleichung, 3, 6).verdoppeln()));

@@ -2,6 +2,7 @@ package Funktionen;
 
 import java.util.ArrayList;
 
+import static Funktionen.Funktionen.inverseBerechnenLong;
 import static Funktionen.Funktionen.mod;
 
 public class ECGleichung {

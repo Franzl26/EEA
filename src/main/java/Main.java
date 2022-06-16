@@ -13,10 +13,12 @@ public class Main {
         // ecTest();
         // Uebung5.uebung5();
         // Uebung7.uebung7();
-        Uebung8.uebung8();
+        // Uebung8.uebung8();
+
+        ecdsa();
 
         System.out.println("\n\n");
-
+        //System.out.println(modPow(23,31,97));
     }
 
     public static void test() {
@@ -66,5 +68,25 @@ public class Main {
         });
         System.out.println(p2.mult(13*17));
 
+    }
+
+    public static void ecdsa() {
+        ECGleichung gleichung = new ECGleichung(2,2,17);
+        ECPunkt punkt = new ECPunkt(gleichung,5,1);
+        long d = 10;
+        long n = 19;
+
+        long hash = 12;
+        long k = 11;
+
+        ECDSASignAndVerify(gleichung,punkt,n,d,hash,k);
+        System.out.println("\n");
+        hash = 4;
+        k = 13;
+        ECDSASignAndVerify(gleichung,punkt,n,d,hash,k);
+        System.out.println("\n");
+        hash = 9;
+        k = 8;
+        ECDSASignAndVerify(gleichung,punkt,n,d,hash,k);
     }
 }

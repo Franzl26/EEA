@@ -220,4 +220,38 @@ public class Funktionen {
         }
         return x;
     }
+
+    public static void ECDSASignAndVerify(ECGleichung gleichung, ECPunkt G, long n, long d, long hash, long k) {
+        System.out.println("Gleichung: " + gleichung);
+        System.out.println("Basispunkt G = " + G);
+        System.out.println("privater Schluessel d = " + d);
+        System.out.println("Hashwert = " + hash);
+        System.out.println("k = " + k);
+        ECPunkt Q = G.mult(d);
+        System.out.println("oeffentlicher Schluessel Q = d * G = " + d + " * " + G + " = " + Q);
+        System.out.println("\nSignieren:");
+        ECPunkt A = G.mult(k);
+        System.out.println("A = k * G = " + k + " * " + G + " = " + A);
+        long kInv = inverseBerechnenLong(k, n);
+        System.out.println("k^-1 mod n = " + k + "^-1 mod " + n + " = " + kInv);
+        long r = mod(A.x, n);
+        System.out.println("r = Ax mod n = " + A.x + " mod " + n + " = " + r);
+        long s = mod(kInv * (hash + r * d), n);
+        System.out.println("s = [k^-1 * (H(m) + r * d)] mod n = "
+                + k + "^-1 * (" + hash + " + " + r + " * " + d + ") mod " + n + " = " + s);
+        System.out.println("\nVerifizieren:");
+        long w = inverseBerechnenLong(s, n);
+        System.out.println("w = s^-1 mod n = " + s + "^-1 mod " + n + " = " + w);
+        long u1 = mod(hash * w, n);
+        System.out.println("u1 = [H(m) * w] mod n = " + hash + " * " + w + " mod " + n + " = " + u1);
+        long u2 = mod(r * w, n);
+        System.out.println("u2 = [r * w] mod n = " + r + " * " + w + " mod " + n + " = " + u2);
+        ECPunkt A2 = G.mult(u1).add(Q.mult(u2));
+        System.out.println("A = u1*G + u2*Q = " + u1 + " * " + G + " + " + u2 + " * " + G + " = " + A2);
+        long rTest = mod(A2.x, n);
+        System.out.println("r = Ax mod n ?");
+        System.out.println(r + " = " + A2.x + " mod " + n + " ?");
+        System.out.println(r + " = " + rTest + " ?");
+        System.out.println((rTest == r));
+    }
 }
