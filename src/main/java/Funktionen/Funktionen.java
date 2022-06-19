@@ -247,7 +247,7 @@ public class Funktionen {
         long u2 = mod(r * w, n);
         System.out.println("u2 = [r * w] mod n = " + r + " * " + w + " mod " + n + " = " + u2);
         ECPunkt A2 = G.mult(u1).add(Q.mult(u2));
-        System.out.println("A = u1*G + u2*Q = " + u1 + " * " + G + " + " + u2 + " * " + G + " = " + A2);
+        System.out.println("A = u1*G + u2*Q = " + u1 + " * " + G + " + " + u2 + " * " + Q + " = " + A2);
         long rTest = mod(A2.x, n);
         System.out.println("r = Ax mod n ?");
         System.out.println(r + " = " + A2.x + " mod " + n + " ?");
